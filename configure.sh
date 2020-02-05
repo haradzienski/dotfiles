@@ -48,9 +48,10 @@ declare -a FILES_TO_SYMLINK=(
   # 'ide/vscode'
 )
 
-# declare -a FULL_PATH_FILES_TO_SYMLINK=(
-#   'config/nvim/init.vim'
-# )
+declare -a FULL_PATH_FILES_TO_SYMLINK=(
+  'config/kitty/kitty.conf'
+  'config/kitty/dracula.conf'
+)
 
 print_success() {
   if [[ $BUILD ]]; then
@@ -129,6 +130,11 @@ install_zsh() {
   if [[ ! -d $HOME/.oh-my-zsh/ ]]; then
     git clone --depth=1 https://github.com/robbyrussell/oh-my-zsh.git "$HOME/.oh-my-zsh"
   fi
+  # Download aphrodite.zsh-theme if it isn't already present
+  if [[ ! -f $HOME/.oh-my-zsh/custom/themes/aphrodite.zsh_theme ]]; then
+    mkdir -p ~/.oh-my-zsh/custom/themes/
+    wget -xqO ~/.oh-my-zsh/custom/themes/aphrodite.zsh-theme https://git.io/v5ohc
+  fi
 }
 
 link_file() {
@@ -171,17 +177,17 @@ for i in "${FILES_TO_SYMLINK[@]}"; do
   fi
 done
 
-# for i in "${FULL_PATH_FILES_TO_SYMLINK[@]}"; do
-#   sourceFile="$(pwd)/$i"
-#   targetFile="$HOME/.$i"
+for i in "${FULL_PATH_FILES_TO_SYMLINK[@]}"; do
+  sourceFile="$(pwd)/$i"
+  targetFile="$HOME/.$i"
 
-#   if [[ $BUILD ]]; then
-#     mkdir -p $(dirname $targetFile)
-#     link_file $sourceFile $targetFile
-#   else
-#     unlink_file $sourceFile $targetFile
-#   fi
-# done
+  if [[ $BUILD ]]; then
+    mkdir -p $(dirname $targetFile)
+    link_file $sourceFile $targetFile
+  else
+    unlink_file $sourceFile $targetFile
+  fi
+done
 
 if [[ $BUILD ]]; then
   # Install zsh (if not available) and oh-my-zsh and p10k.
