@@ -44,13 +44,13 @@ done
 
 declare -a FILES_TO_SYMLINK=(
   'shell/zshrc'
-
-  # 'ide/vscode'
+  'ide/vimrc'
 )
 
 declare -a FULL_PATH_FILES_TO_SYMLINK=(
   'config/kitty/kitty.conf'
   'config/kitty/dracula.conf'
+  'vim/autoload/plug.vim'
 )
 
 print_success() {
