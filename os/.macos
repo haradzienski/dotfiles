@@ -1,2 +1,0 @@
-# disable popup showing accented characters that appears after holding down a key
-defaults write -g ApplePressAndHoldEnabled -bool false
