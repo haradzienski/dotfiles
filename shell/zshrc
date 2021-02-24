@@ -115,8 +115,4 @@ function killport () {
   fi
 }
 
-# Completion for kitty
 
-autoload -Uz compinit
-compinit
-kitty + complete setup zsh | source /dev/stdin
