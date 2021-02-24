@@ -43,12 +43,14 @@ while getopts :ht: option; do
 done
 
 declare -a FILES_TO_SYMLINK=(
+  'shell/zshrc'
+  'ide/vimrc'
 )
 
 declare -a FULL_PATH_FILES_TO_SYMLINK=(
-  'config/fish/config.fish'
-  'config/fish/fish_plugins'
-  'config/fish/fish_variables'
+  'config/kitty/kitty.conf'
+  'config/kitty/dracula.conf'
+  'vim/autoload/plug.vim'
 )
 
 print_success() {
@@ -103,31 +105,35 @@ answer_is_yes() {
     || return 1
 }
 
-install_fish() {
-  # Test to see if fish is installed.
-  if [ -z "$(command -v fish)" ]; then
-    # If fish isn't installed, get the platform of the current machine and
-    # install fish with the appropriate package manager.
+install_zsh() {
+  # Test to see if zsh is installed.
+  if [ -z "$(command -v zsh)" ]; then
+    # If zsh isn't installed, get the platform of the current machine and
+    # install zsh with the appropriate package manager.
     platform=$(uname);
     if [[ $platform == 'Linux' ]]; then
       if [[ -f /etc/redhat-release ]]; then
-        sudo yum install fish
+        sudo yum install zsh
       fi
       if [[ -f /etc/debian_version ]]; then
-        sudo apt-get -y install fish
+        sudo apt-get -y install zsh
       fi
     elif [[ $platform == 'Darwin' ]]; then
-      brew install fish
+      brew install zsh
     fi
   fi
-  # Set the default shell to fish if it isn't currently set to fish
-  if [[ ! "$SHELL" == "$(command -v fish)" ]]; then
-    chsh -s "$(command -v fish)"
+  # Set the default shell to zsh if it isn't currently set to zsh
+  if [[ ! "$SHELL" == "$(command -v zsh)" ]]; then
+    chsh -s "$(command -v zsh)"
   fi
-  # Test to see if fisher is installed.
-  if [ -z "$(command -v fisher)" ]; then
-    # If it's not installed, download it and install plugins from fisher_plugins
-    execute "curl -sL git.io/fisher | source && fisher update"
+  # Clone Oh My Zsh if it isn't already present
+  if [[ ! -d $HOME/.oh-my-zsh/ ]]; then
+    git clone --depth=1 https://github.com/robbyrussell/oh-my-zsh.git "$HOME/.oh-my-zsh"
+  fi
+  # Download aphrodite.zsh-theme if it isn't already present
+  if [[ ! -f $HOME/.oh-my-zsh/custom/themes/aphrodite.zsh_theme ]]; then
+    mkdir -p ~/.oh-my-zsh/custom/themes/
+    wget -xqO ~/.oh-my-zsh/custom/themes/aphrodite.zsh-theme https://git.io/v5ohc
   fi
 }
 
@@ -184,8 +190,8 @@ for i in "${FULL_PATH_FILES_TO_SYMLINK[@]}"; do
 done
 
 if [[ $BUILD ]]; then
-  # Install fish (if not available)
-  install_fish
+  # Install zsh (if not available) and oh-my-zsh and p10k.
+  install_zsh
 
   # Link static gitignore.
   # git config --global include.path ~/.gitconfig.static
