@@ -44,13 +44,11 @@ done
 
 declare -a FILES_TO_SYMLINK=(
   'shell/zshrc'
-
-  # 'ide/vscode'
 )
 
-# declare -a FULL_PATH_FILES_TO_SYMLINK=(
-#   'config/nvim/init.vim'
-# )
+declare -a FULL_PATH_FILES_TO_SYMLINK=(
+  'oh-my-zsh/custom/aliases.zsh'
+)
 
 print_success() {
   if [[ $BUILD ]]; then
@@ -105,22 +103,8 @@ answer_is_yes() {
 }
 
 install_zsh() {
-  # Test to see if zsh is installed.
-  if [ -z "$(command -v zsh)" ]; then
-    # If zsh isn't installed, get the platform of the current machine and
-    # install zsh with the appropriate package manager.
-    platform=$(uname);
-    if [[ $platform == 'Linux' ]]; then
-      if [[ -f /etc/redhat-release ]]; then
-        sudo yum install zsh
-      fi
-      if [[ -f /etc/debian_version ]]; then
-        sudo apt-get -y install zsh
-      fi
-    elif [[ $platform == 'Darwin' ]]; then
-      brew install zsh
-    fi
-  fi
+  install_package "zsh"
+
   # Set the default shell to zsh if it isn't currently set to zsh
   if [[ ! "$SHELL" == "$(command -v zsh)" ]]; then
     chsh -s "$(command -v zsh)"
@@ -128,6 +112,27 @@ install_zsh() {
   # Clone Oh My Zsh if it isn't already present
   if [[ ! -d $HOME/.oh-my-zsh/ ]]; then
     git clone --depth=1 https://github.com/robbyrussell/oh-my-zsh.git "$HOME/.oh-my-zsh"
+  fi
+}
+
+install_package() {
+  local packageName=$1
+
+  # Test to see if the package is installed.
+  if [ -z "$(command -v $packageName)" ]; then
+    # If the package isn't installed, get the platform of the current machine and
+    # install it with the appropriate package manager.
+    platform=$(uname);
+    if [[ $platform == 'Linux' ]]; then
+      if [[ -f /etc/redhat-release ]]; then
+        sudo yum install $packageName
+      fi
+      if [[ -f /etc/debian_version ]]; then
+        sudo apt-get -y install $packageName
+      fi
+    elif [[ $platform == 'Darwin' ]]; then
+      brew install $packageName
+    fi
   fi
 }
 
@@ -171,24 +176,26 @@ for i in "${FILES_TO_SYMLINK[@]}"; do
   fi
 done
 
-# for i in "${FULL_PATH_FILES_TO_SYMLINK[@]}"; do
-#   sourceFile="$(pwd)/$i"
-#   targetFile="$HOME/.$i"
+for i in "${FULL_PATH_FILES_TO_SYMLINK[@]}"; do
+  sourceFile="$(pwd)/$i"
+  targetFile="$HOME/.$i"
 
-#   if [[ $BUILD ]]; then
-#     mkdir -p $(dirname $targetFile)
-#     link_file $sourceFile $targetFile
-#   else
-#     unlink_file $sourceFile $targetFile
-#   fi
-# done
+  if [[ $BUILD ]]; then
+    mkdir -p $(dirname $targetFile)
+    link_file $sourceFile $targetFile
+  else
+    unlink_file $sourceFile $targetFile
+  fi
+done
 
 if [[ $BUILD ]]; then
-  # Install zsh (if not available) and oh-my-zsh and p10k.
+  # Install zsh (if not available) and oh-my-zsh and a theme.
   install_zsh
 
   # Link static gitignore.
   # git config --global include.path ~/.gitconfig.static
+
+  install_package "diff-so-fancy"
 
   # Set up diff-so-fancy.
   if [[ "$(command -v diff-so-fancy)" ]]; then
@@ -209,4 +216,6 @@ if [[ $BUILD ]]; then
     git config --global color.diff.new        "green"
     git config --global color.diff.whitespace "red reverse"
   fi
+
+  git config --global pager.branch 'false'
 fi
