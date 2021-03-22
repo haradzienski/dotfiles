@@ -222,4 +222,6 @@ if [[ $BUILD ]]; then
   fi
 
   git config --global pager.branch 'false'
+
+  install_package "asdf"
 fi
