@@ -43,7 +43,8 @@ while getopts :ht: option; do
 done
 
 declare -a FILES_TO_SYMLINK=(
-  'shell/zshrc'
+  'zshrc'
+  'asdfrc'
 )
 
 declare -a FULL_PATH_FILES_TO_SYMLINK=(
@@ -102,24 +103,6 @@ answer_is_yes() {
     || return 1
 }
 
-install_zsh() {
-  install_package "zsh"
-
-  # Set the default shell to zsh if it isn't currently set to zsh
-  if [[ ! "$SHELL" == "$(command -v zsh)" ]]; then
-    chsh -s "$(command -v zsh)"
-  fi
-  # Clone Oh My Zsh if it isn't already present
-  if [[ ! -d $HOME/.oh-my-zsh/ ]]; then
-    install_package "wget"
-    sh -c "$(wget -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-  fi
-  # Clone zsh-syntax-highlighting plugin if it isn't already present
-  if [[ ! -d $HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting ]]; then
-    git clone https://github.com/zsh-users/zsh-syntax-highlighting.git "$HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting"
-  fi
-}
-
 install_package() {
   local packageName=$1
 
@@ -138,6 +121,24 @@ install_package() {
     elif [[ $platform == 'Darwin' ]]; then
       brew install $packageName
     fi
+  fi
+}
+
+install_zsh() {
+  install_package "zsh"
+
+  # Set the default shell to zsh if it isn't currently set to zsh
+  if [[ ! "$SHELL" == "$(command -v zsh)" ]]; then
+    chsh -s "$(command -v zsh)"
+  fi
+  # Clone Oh My Zsh if it isn't already present
+  if [[ ! -d $HOME/.oh-my-zsh/ ]]; then
+    install_package "wget"
+    sh -c "$(wget -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+  fi
+  # Clone zsh-syntax-highlighting plugin if it isn't already present
+  if [[ ! -d $HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting ]]; then
+    git clone https://github.com/zsh-users/zsh-syntax-highlighting.git "$HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting"
   fi
 }
 
@@ -172,9 +173,6 @@ unlink_file() {
 if [[ $BUILD ]]; then
   # Install zsh (if not available) and oh-my-zsh with plugins.
   install_zsh
-
-  # Install nvm
-  install_package "nvm"
 
   # Link static gitignore.
   # git config --global include.path ~/.gitconfig.static
