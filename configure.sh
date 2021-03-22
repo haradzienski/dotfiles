@@ -111,7 +111,8 @@ install_zsh() {
   fi
   # Clone Oh My Zsh if it isn't already present
   if [[ ! -d $HOME/.oh-my-zsh/ ]]; then
-    git clone --depth=1 https://github.com/robbyrussell/oh-my-zsh.git "$HOME/.oh-my-zsh"
+    install_package "wget"
+    sh -c "$(wget -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
   fi
   # Clone zsh-syntax-highlighting plugin if it isn't already present
   if [[ ! -d $HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting ]]; then
@@ -168,33 +169,12 @@ unlink_file() {
   fi
 }
 
-# Symlink (or unlink) the dotfiles.
-for i in "${FILES_TO_SYMLINK[@]}"; do
-  sourceFile="$(pwd)/$i"
-  targetFile="$HOME/.$(printf "%s" "$i" | sed "s/.*\/\(.*\)/\1/g")"
-
-  if [[ $BUILD ]]; then
-    link_file $sourceFile $targetFile
-  else
-    unlink_file $sourceFile $targetFile
-  fi
-done
-
-for i in "${FULL_PATH_FILES_TO_SYMLINK[@]}"; do
-  sourceFile="$(pwd)/$i"
-  targetFile="$HOME/.$i"
-
-  if [[ $BUILD ]]; then
-    mkdir -p $(dirname $targetFile)
-    link_file $sourceFile $targetFile
-  else
-    unlink_file $sourceFile $targetFile
-  fi
-done
-
 if [[ $BUILD ]]; then
-  # Install zsh (if not available) and oh-my-zsh and a theme.
+  # Install zsh (if not available) and oh-my-zsh with plugins.
   install_zsh
+
+  # Install nvm
+  install_package "nvm"
 
   # Link static gitignore.
   # git config --global include.path ~/.gitconfig.static
@@ -225,3 +205,27 @@ if [[ $BUILD ]]; then
 
   install_package "asdf"
 fi
+
+# Symlink (or unlink) the dotfiles.
+for i in "${FILES_TO_SYMLINK[@]}"; do
+  sourceFile="$(pwd)/$i"
+  targetFile="$HOME/.$(printf "%s" "$i" | sed "s/.*\/\(.*\)/\1/g")"
+
+  if [[ $BUILD ]]; then
+    link_file $sourceFile $targetFile
+  else
+    unlink_file $sourceFile $targetFile
+  fi
+done
+
+for i in "${FULL_PATH_FILES_TO_SYMLINK[@]}"; do
+  sourceFile="$(pwd)/$i"
+  targetFile="$HOME/.$i"
+
+  if [[ $BUILD ]]; then
+    mkdir -p $(dirname $targetFile)
+    link_file $sourceFile $targetFile
+  else
+    unlink_file $sourceFile $targetFile
+  fi
+done
