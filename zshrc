@@ -101,3 +101,5 @@ export TERM=xterm-256color
 # Not using omz plugin because it conflicts with Homebrew installation method
 # See https://github.com/asdf-vm/asdf/issues/785
 . /usr/local/opt/asdf/asdf.sh
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

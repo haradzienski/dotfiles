@@ -43,8 +43,9 @@ while getopts :ht: option; do
 done
 
 declare -a FILES_TO_SYMLINK=(
-  'zshrc'
   'asdfrc'
+  'fzf.zsh'
+  'zshrc'
 )
 
 declare -a FULL_PATH_FILES_TO_SYMLINK=(
@@ -110,6 +111,7 @@ install_package() {
   if [ -z "$(command -v $packageName)" ]; then
     # If the package isn't installed, get the platform of the current machine and
     # install it with the appropriate package manager.
+    # NOTE: the build process will fail for platforms other than MacOS as brew is hardcoded in other places
     platform=$(uname);
     if [[ $platform == 'Linux' ]]; then
       if [[ -f /etc/redhat-release ]]; then
@@ -202,6 +204,7 @@ if [[ $BUILD ]]; then
   git config --global pager.branch 'false'
 
   install_package "asdf"
+  install_package "fzf" # https://github.com/junegunn/fzf
 fi
 
 # Symlink (or unlink) the dotfiles.
