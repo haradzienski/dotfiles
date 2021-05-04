@@ -6,8 +6,10 @@ alias gco='git checkout'
 alias gd='git diff'
 alias gds='git diff --staged'
 alias gf='git fetch --prune'
+alias gl="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
 alias gp='git pull --prune'
 alias gpu='git push'
+alias gr='git rebase'
 alias gs='git status'
 
 # kubectl
