@@ -15,17 +15,24 @@ Plug 'leafgarland/typescript-vim'
 
 call plug#end()
 
-" preservim/nerdtree
+" map <leader> to comma
+let mapleader = "," 
+
+" --- preservim/nerdtree: begin ---
 " Start NERDTree when Vim starts with a directory argument.
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists('s:std_in') |
     \ execute 'NERDTree' argv()[0] | wincmd p | enew | execute 'cd '.argv()[0] | endif
 
-" pangloss/vim-javascript
+nnoremap <leader>n :NERDTreeToggle<CR>
+" --- preservim/nerdree: end ---
+
+" --- pangloss/vim-javascript: begin ---
 " Javascript Syntax Highlighting
 let g:javascript_plugin_jsdoc = 1 " highlight JSDoc blobs
+" --- pangloss/vim-javascript: end ---
 
-" --- begin neoclide/coc.nvim settings ---
+" --- neoclide/coc.nvim: begin ---
 " CoC Extensions
 let g:coc_global_extensions = ['coc-json', 'coc-tsserver']
 
@@ -192,13 +199,11 @@ set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 " nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list.
 " nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
-" --- end neoclide/coc.nvim settings ---
+" --- neoclide/coc.nvim: end ---
 
 
 " Enable hybrid line numbers
 set number relativenumber
 
 " Miscellanous keymaps
-let mapleader = "," " map leader to comma
-nnoremap <leader>n :NERDTreeToggle<CR>
 nnoremap <leader>b :buffers<CR>:buffer<Space>
