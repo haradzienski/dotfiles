@@ -45,6 +45,7 @@ done
 declare -a FILES_TO_SYMLINK=(
   'asdfrc'
   'fzf.zsh'
+  'vimrc'
   'zshrc'
 )
 
