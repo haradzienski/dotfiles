@@ -34,7 +34,7 @@ let g:javascript_plugin_jsdoc = 1 " highlight JSDoc blobs
 
 " --- neoclide/coc.nvim: begin ---
 " CoC Extensions
-let g:coc_global_extensions = ['coc-json', 'coc-tsserver']
+let g:coc_global_extensions = ['coc-json', 'coc-sql', 'coc-tsserver', 'coc-yaml']
 
 " Set internal encoding of vim, not needed on neovim, since coc.nvim using some
 " unicode characters in the file autoload/float.vim
@@ -201,9 +201,11 @@ set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 " nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
 " --- neoclide/coc.nvim: end ---
 
-
 " Enable hybrid line numbers
 set number relativenumber
 
 " Miscellanous keymaps
+" <leader>+b: list buffers and begin switching
 nnoremap <leader>b :buffers<CR>:buffer<Space>
+" <leader>+q: close current buffer without closing it's windows
+map <leader>q :bp<bar>sp<bar>bn<bar>bd<CR>

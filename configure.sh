@@ -45,6 +45,7 @@ done
 declare -a FILES_TO_SYMLINK=(
   'asdfrc'
   'fzf.zsh'
+  'gitignore'
   'vimrc'
   'zshrc'
 )
@@ -203,6 +204,9 @@ if [[ $BUILD ]]; then
   fi
 
   git config --global pager.branch 'false'
+
+  # Tell git to use gitignore from this repo
+  git config --global core.excludesfile ~/.gitignore
 
   install_package "asdf"
   install_package "fzf" # https://github.com/junegunn/fzf
