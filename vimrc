@@ -204,6 +204,9 @@ set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 " Enable hybrid line numbers
 set number relativenumber
 
+" Enable syntax highlighting in code blocks within markdown
+let g:markdown_fenced_languages = ['sql', 'typescript']
+
 " Miscellanous keymaps
 " <leader>+b: list buffers and begin switching
 nnoremap <leader>b :buffers<CR>:buffer<Space>
