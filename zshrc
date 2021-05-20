@@ -92,10 +92,10 @@ source $ZSH/oh-my-zsh.sh
 # export ARCHFLAGS="-arch x86_64"
 
 # Set CLICOLOR if you want Ansi Colors in iTerm2 
-export CLICOLOR=1
+# export CLICOLOR=1
 
 # Set colors to match iTerm2 Terminal Colors
-export TERM=xterm-256color
+# export TERM=xterm-256color
 
 # Enable asdf completion
 # Not using omz plugin because it conflicts with Homebrew installation method
