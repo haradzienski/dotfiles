@@ -7,16 +7,27 @@ endif
 
 call plug#begin('~/.vim/plugged')
 
+Plug 'morhetz/gruvbox'
 Plug 'preservim/nerdtree'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'pangloss/vim-javascript'
 Plug 'leafgarland/typescript-vim'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 
 call plug#end()
 
 " map <leader> to comma
 let mapleader = "," 
+
+" enable TrueColor support
+set termguicolors
+set t_Co=256
+
+" --- morhetz/gruvbox: begin ---
+colorscheme gruvbox
+" --- morhetz/grubbox: end ---
 
 " --- preservim/nerdtree: begin ---
 " Start NERDTree when Vim starts with a directory argument.
@@ -24,11 +35,14 @@ autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists('s:std_in') |
     \ execute 'NERDTree' argv()[0] | wincmd p | enew | execute 'cd '.argv()[0] | endif
 
+" If another buffer tries to replace NERDTree, put it in the other window, and bring back NERDTree.
+autocmd BufEnter * if bufname('#') =~ 'NERD_tree_\d\+' && bufname('%') !~ 'NERD_tree_\d\+' && winnr('$') > 1 |
+    \ let buf=bufnr() | buffer# | execute "normal! \<C-W>w" | execute 'buffer'.buf | endif
+
 nnoremap <leader>n :NERDTreeToggle<CR>
 " --- preservim/nerdree: end ---
 
 " --- pangloss/vim-javascript: begin ---
-" Javascript Syntax Highlighting
 let g:javascript_plugin_jsdoc = 1 " highlight JSDoc blobs
 " --- pangloss/vim-javascript: end ---
 
@@ -177,11 +191,6 @@ command! -nargs=? Fold :call     CocAction('fold', <f-args>)
 " Add `:OR` command for organize imports of the current buffer.
 command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
 
-" Add (Neo)Vim's native statusline support.
-" NOTE: Please see `:h coc-status` for integrations with external plugins that
-" provide custom statusline: lightline.vim, vim-airline.
-set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
-
 " Mappings for CoCList
 " Show all diagnostics.
 " nnoremap <silent><nowait> <space>a  :<C-u>CocList diagnostics<cr>
@@ -201,6 +210,10 @@ set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 " nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
 " --- neoclide/coc.nvim: end ---
 
+" --- vim-airline/vim-airline-themes: begin ---
+let g:airline_theme='gruvbox'
+" --- vim-airline/vim-airline-themes: end ---
+
 " Enable hybrid line numbers
 set number relativenumber
 
@@ -210,5 +223,3 @@ let g:markdown_fenced_languages = ['sql', 'typescript']
 " Miscellanous keymaps
 " <leader>+b: list buffers and begin switching
 nnoremap <leader>b :buffers<CR>:buffer<Space>
-" <leader>+q: close current buffer without closing it's windows
-map <leader>q :bp<bar>sp<bar>bn<bar>bd<CR>
