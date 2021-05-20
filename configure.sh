@@ -45,6 +45,7 @@ done
 declare -a FILES_TO_SYMLINK=(
   'asdfrc'
   'fzf.zsh'
+  'gitconfig'
   'gitignore'
   'vimrc'
   'zshrc'
@@ -183,32 +184,6 @@ if [[ $BUILD ]]; then
   # git config --global include.path ~/.gitconfig.static
 
   install_package "diff-so-fancy"
-
-  # Set up diff-so-fancy.
-  if [[ "$(command -v diff-so-fancy)" ]]; then
-    git config --global pager.diff "diff-so-fancy | less --tabs=4 -RFX"
-    git config --global pager.show "diff-so-fancy | less --tabs=4 -RFX"
-
-    git config --global color.ui true
-
-    git config --global color.diff-highlight.oldNormal    "red"
-    git config --global color.diff-highlight.oldHighlight "red 52"
-    git config --global color.diff-highlight.newNormal    "green"
-    git config --global color.diff-highlight.newHighlight "green 22"
-
-    git config --global color.diff.meta       "yellow"
-    git config --global color.diff.frag       "magenta"
-    git config --global color.diff.commit     "yellow"
-    git config --global color.diff.old        "red"
-    git config --global color.diff.new        "green"
-    git config --global color.diff.whitespace "red reverse"
-  fi
-
-  git config --global pager.branch 'false'
-
-  # Tell git to use gitignore from this repo
-  git config --global core.excludesfile ~/.gitignore
-
   install_package "asdf"
   install_package "fzf" # https://github.com/junegunn/fzf
 fi

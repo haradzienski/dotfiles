@@ -1,0 +1,31 @@
+[user]
+	name = Mikalai Ziuz
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+[pager]
+	diff = diff-so-fancy | less --tabs=2 -RFX
+	show = diff-so-fancy | less --tabs=2 -RFX
+	branch = false
+[color]
+	ui = true
+[color "diff-highlight"]
+	oldNormal = red
+	oldHighlight = red 52
+	newNormal = green
+	newHighlight = green 22
+[color "diff"]
+	meta = yellow
+	frag = magenta
+	commit = yellow
+	old = red
+	new = green
+	whitespace = red reverse
+[pull]
+	rebase = false
+[core]
+	excludesfile = ~/.gitignore
+[include]
+	path = ~/.gitconfig.local
