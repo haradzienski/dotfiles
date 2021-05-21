@@ -27,15 +27,5 @@
 	rebase = false
 [core]
 	excludesfile = ~/.gitignore
-[alias]
-	br = branch
-	co = checkout
-	cm = commit
-	di = diff --staged
-	lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit 
-	pl = pull --prune
-	pu = push
-	rb = rebase
-	st = status
 [include]
 	path = ~/.gitconfig.local
