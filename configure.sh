@@ -180,12 +180,10 @@ if [[ $BUILD ]]; then
   # Install zsh (if not available) and oh-my-zsh with plugins.
   install_zsh
 
-  # Link static gitignore.
-  # git config --global include.path ~/.gitconfig.static
-
   install_package "diff-so-fancy"
   install_package "asdf"
   install_package "fzf" # https://github.com/junegunn/fzf
+  install_package "neovim"
 fi
 
 # Symlink (or unlink) the dotfiles.

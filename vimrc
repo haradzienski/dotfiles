@@ -13,15 +13,23 @@ Plug 'ctrlpvim/ctrlp.vim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'pangloss/vim-javascript'
 Plug 'leafgarland/typescript-vim'
-Plug 'bling/vim-bufferline'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'tpope/vim-fugitive'
+Plug 'dense-analysis/ale'
+Plug 'prettier/vim-prettier', {
+  \ 'do': 'npm install',
+  \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'yaml', 'html'] }
 
 call plug#end()
 
+" use 2 spaces as tab
+set tabstop=2
+set shiftwidth=0
+set expandtab
+
 " map <leader> to comma
-let mapleader = "," 
+let mapleader="," 
 
 " enable TrueColor support
 set termguicolors
@@ -40,8 +48,32 @@ autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists('s:std_in
 autocmd BufEnter * if bufname('#') =~ 'NERD_tree_\d\+' && bufname('%') !~ 'NERD_tree_\d\+' && winnr('$') > 1 |
     \ let buf=bufnr() | buffer# | execute "normal! \<C-W>w" | execute 'buffer'.buf | endif
 
+" Check if NERDTree is open or active
+function! IsNERDTreeOpen()        
+  return exists("t:NERDTreeBufName") && (bufwinnr(t:NERDTreeBufName) != -1)
+endfunction
+
+" Call NERDTreeFind iff NERDTree is active, current window contains a modifiable
+" file, and we're not in vimdiff
+function! SyncTree()
+  if &modifiable && IsNERDTreeOpen() && strlen(expand('%')) > 0 && !&diff
+    NERDTreeFind
+    wincmd p
+  endif
+endfunction
+
+" Highlight currently open buffer in NERDTree
+autocmd BufEnter * call SyncTree()
+
+" <leader>+n: toggle NERDTree sidebar
 nnoremap <leader>n :NERDTreeToggle<CR>
 " --- preservim/nerdree: end ---
+
+" --- ctrlpvim/ctrlp.vim: begin ---
+" <leader>+b: open CtrlP in buffer mode
+nnoremap <leader>b :CtrlPBuffer<CR>
+" --- preservim/nerdree: end ---
+" --- ctrlpvim/ctrlp.vim: begin ---
 
 " --- pangloss/vim-javascript: begin ---
 let g:javascript_plugin_jsdoc = 1 " highlight JSDoc blobs
@@ -211,16 +243,22 @@ command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organize
 " nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
 " --- neoclide/coc.nvim: end ---
 
+" --- bling/vim-bufferline: begin ---
+let g:bufferline_echo = 0
+" --- bling/vim-bufferline: end ---
+
 " --- vim-airline/vim-airline-themes: begin ---
-let g:airline_theme='gruvbox'
+let g:airline_theme = 'gruvbox'
 " --- vim-airline/vim-airline-themes: end ---
+
+" --- dense-analysis/ale: begin ---
+let g:ale_fixers = ['prettier', 'eslint']
+" <leader>+l: run lint autofix
+nnoremap <leader>l :ALEFixSuggest<CR>
+" --- dense-analysis/ale: end --- 
 
 " Enable hybrid line numbers
 set number relativenumber
 
 " Enable syntax highlighting in code blocks within markdown
 let g:markdown_fenced_languages = ['sql', 'typescript']
-
-" Miscellanous keymaps
-" <leader>+b: list buffers and begin switching
-nnoremap <leader>b :buffers<CR>:buffer<Space>
