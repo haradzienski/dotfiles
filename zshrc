@@ -60,17 +60,22 @@ ZSH_THEME="lambda"
 # "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
 # or set a custom format using the strftime function format specifications,
 # see 'man strftime' for details.
-# HIST_STAMPS="mm/dd/yyyy"
+HIST_STAMPS="yyyy-mm-dd"
 
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
+
+# start: `zsh-nvm` plugin
+# Automatically run `nvm use` whenever there's a .nvmrc file in the working dir
+NVM_AUTO_USE=true
+# end: `zsh-nvm` plugin
 
 # Which plugins would you like to load?
 # Standard plugins can be found in ~/.oh-my-zsh/plugins/*
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(zsh-syntax-highlighting)
+plugins=(zsh-syntax-highlighting zsh-nvm)
 
 source $ZSH/oh-my-zsh.sh
 

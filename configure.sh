@@ -135,14 +135,21 @@ install_zsh() {
   if [[ ! "$SHELL" == "$(command -v zsh)" ]]; then
     chsh -s "$(command -v zsh)"
   fi
+  
   # Clone Oh My Zsh if it isn't already present
   if [[ ! -d $HOME/.oh-my-zsh/ ]]; then
     install_package "wget"
     sh -c "$(wget -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
   fi
+  
   # Clone zsh-syntax-highlighting plugin if it isn't already present
   if [[ ! -d $HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting ]]; then
     git clone https://github.com/zsh-users/zsh-syntax-highlighting.git "$HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting"
+  fi
+
+  # Clone zsh-nvm plugin if it isn't already present
+    if [[ ! -d $HOME/.oh-my-zsh/custom/plugins/zsh-nvm ]]; then
+    git clone https://github.com/lukechilds/zsh-nvm "$HOME/.oh-my-zsh/custom/plugins/zsh-nvm"
   fi
 }
 
