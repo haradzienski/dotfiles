@@ -91,9 +91,4 @@ source $ZSH/oh-my-zsh.sh
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
 
-# Enable asdf completion
-# Not using omz plugin because it conflicts with Homebrew installation method
-# See https://github.com/asdf-vm/asdf/issues/785
-. /usr/local/opt/asdf/asdf.sh
-
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

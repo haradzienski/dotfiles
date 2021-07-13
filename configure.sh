@@ -43,7 +43,6 @@ while getopts :ht: option; do
 done
 
 declare -a FILES_TO_SYMLINK=(
-  'asdfrc'
   'fzf.zsh'
   'gitconfig'
   'gitignore'
@@ -53,7 +52,6 @@ declare -a FILES_TO_SYMLINK=(
 
 declare -a FULL_PATH_FILES_TO_SYMLINK=(
   'oh-my-zsh/custom/aliases.zsh'
-  'oh-my-zsh/custom/gruvbox-colors.zsh'
 )
 
 print_success() {
@@ -181,9 +179,7 @@ if [[ $BUILD ]]; then
   install_zsh
 
   install_package "diff-so-fancy"
-  install_package "asdf"
   install_package "fzf" # https://github.com/junegunn/fzf
-  install_package "neovim"
 fi
 
 # Symlink (or unlink) the dotfiles.
