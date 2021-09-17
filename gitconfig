@@ -1,14 +1,5 @@
-[user]
-	name = Mikalai Ziuz
-[filter "lfs"]
-	clean = git-lfs clean -- %f
-	smudge = git-lfs smudge -- %f
-	process = git-lfs filter-process
-	required = true
-[pager]
-	diff = diff-so-fancy | less --tabs=2 -RFX
-	show = diff-so-fancy | less --tabs=2 -RFX
-	branch = false
+# [branch]
+#   autoSetupRebase=true
 [color]
 	ui = true
 [color "diff-highlight"]
@@ -23,9 +14,22 @@
 	old = red
 	new = green
 	whitespace = red reverse
-[pull]
-	rebase = false
 [core]
 	excludesfile = ~/.gitignore
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+[pager]
+	diff = diff-so-fancy | less --tabs=2 -RFX
+	show = diff-so-fancy | less --tabs=2 -RFX
+	branch = false
+[pull]
+	rebase = true
+[push]
+	default = current
+[user]
+	name = Mikalai Ziuz
 [include]
 	path = ~/.gitconfig.local
