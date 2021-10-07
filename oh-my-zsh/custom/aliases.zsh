@@ -23,3 +23,6 @@ alias kcx='kubectl config use-context'
 alias nix='npm i --save-exact'
 alias nixd='npm i --save-exact --save-dev'
 alias nixp='npm i --save-exact --save'
+
+# brew
+alias brew_install_deps='brew bundle --file="$HOME/.dotfiles/Brewfile" --no-upgrade'

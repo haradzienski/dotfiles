@@ -52,6 +52,7 @@ declare -a FILES_TO_SYMLINK=(
 
 declare -a FULL_PATH_FILES_TO_SYMLINK=(
   'oh-my-zsh/custom/aliases.zsh'
+  'config/nvim/init.vim'
 )
 
 print_success() {
@@ -106,25 +107,21 @@ answer_is_yes() {
     || return 1
 }
 
+install_homebrew() {
+  # Test to see if it is already installed
+  if [ -z "$(command -v brew)" ]; then
+    # Install if not
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+  fi
+}
+
 install_package() {
   local packageName=$1
 
-  # Test to see if the package is installed.
+  # Test to see if the package is installed
   if [ -z "$(command -v $packageName)" ]; then
-    # If the package isn't installed, get the platform of the current machine and
-    # install it with the appropriate package manager.
-    # NOTE: the build process will fail for platforms other than MacOS as brew is hardcoded in other places
-    platform=$(uname);
-    if [[ $platform == 'Linux' ]]; then
-      if [[ -f /etc/redhat-release ]]; then
-        sudo yum install $packageName
-      fi
-      if [[ -f /etc/debian_version ]]; then
-        sudo apt-get -y install $packageName
-      fi
-    elif [[ $platform == 'Darwin' ]]; then
-      brew install $packageName
-    fi
+    # Install if not
+    brew install $packageName    
   fi
 }
 
@@ -138,7 +135,6 @@ install_zsh() {
   
   # Clone Oh My Zsh if it isn't already present
   if [[ ! -d $HOME/.oh-my-zsh/ ]]; then
-    install_package "wget"
     sh -c "$(wget -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
   fi
   
@@ -182,11 +178,10 @@ unlink_file() {
 }
 
 if [[ $BUILD ]]; then
-  # Install zsh (if not available) and oh-my-zsh with plugins.
-  install_zsh
+  install_homebrew
+  brew bundle --file="$HOME/.dotfiles/Brewfile" --no-upgrade
 
-  install_package "diff-so-fancy"
-  install_package "fzf" # https://github.com/junegunn/fzf
+  install_zsh
 fi
 
 # Symlink (or unlink) the dotfiles.
