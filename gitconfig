@@ -1,5 +1,3 @@
-# [branch]
-#   autoSetupRebase=true
 [color]
 	ui = true
 [color "diff-highlight"]
@@ -30,6 +28,8 @@
 	rebase = true
 [push]
 	default = current
+[rerere]
+	enabled = true
 [user]
 	name = Mikalai Ziuz
 [include]
