@@ -31,6 +31,6 @@
 [rerere]
 	enabled = true
 [user]
-	name = Mikalai Ziuz
+	name = Nick Ziuz
 [include]
 	path = ~/.gitconfig.local
