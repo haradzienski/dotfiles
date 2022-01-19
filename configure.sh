@@ -46,14 +46,11 @@ declare -a FILES_TO_SYMLINK=(
   'fzf.zsh'
   'gitconfig'
   'gitignore'
-  'vimrc'
   'zshrc'
 )
 
 declare -a FULL_PATH_FILES_TO_SYMLINK=(
   'oh-my-zsh/custom/aliases.zsh'
-  'config/nvim/init.vim'
-  'config/nvim/coc-settings.json'
 )
 
 print_success() {
