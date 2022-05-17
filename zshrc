@@ -97,3 +97,5 @@ source $ZSH/oh-my-zsh.sh
 # export ARCHFLAGS="-arch x86_64"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+export REPOS_DIR=$HOME/Documents/Repos
