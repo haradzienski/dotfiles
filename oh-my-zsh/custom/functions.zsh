@@ -15,13 +15,15 @@ goto() {
   fi
 }
 
-# TODO: this is erroring out with "find: illegal option -- t", but works if put in .zshrc
+init_functions_autocomplete() {
+  local REPOS=""
 
-# REPOS=""
+  # find all dirs under $REPOS_DIR, get their names, and build a space-separated string to feed into complete
+  for dir in $(find $REPOS_DIR -type d -print0 -maxdepth 1 -mindepth 1 | xargs -0 basename); do
+    REPOS+="$dir "
+  done
 
-# # find all dirs under $REPOS_DIR, get their names, and build a space-separated string to feed into complete
-# for dir ($(find $REPOS_DIR -type d -print0 -maxdepth 1 -mindepth 1 | xargs -0 basename)); do
-#   REPOS+="$dir "
-# done
+  complete -W $REPOS goto
+}
 
-# complete -W "$REPOS" goto
+init_functions_autocomplete

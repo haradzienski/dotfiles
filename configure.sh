@@ -46,6 +46,7 @@ declare -a FILES_TO_SYMLINK=(
   'fzf.zsh'
   'gitconfig'
   'gitignore'
+  'zshenv'
   'zshrc'
 )
 
