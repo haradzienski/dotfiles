@@ -1,3 +1,6 @@
+# Put Homebrew onto PATH
+eval "$(/opt/homebrew/bin/brew shellenv)"
+
 # Source local version of zshrc.
 if [[ -f ~/.zshrc.local ]]; then
   source ~/.zshrc.local
@@ -10,7 +13,7 @@ export ZSH=$HOME/.oh-my-zsh
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-ZSH_THEME="lambda"
+ZSH_THEME=lambda
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
