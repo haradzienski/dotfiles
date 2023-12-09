@@ -112,6 +112,8 @@ install_homebrew() {
   if [ -z "$(command -v brew)" ]; then
     # Install if not
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
+    eval "$(/opt/homebrew/bin/brew shellenv)"
   fi
 }
 
@@ -135,7 +137,7 @@ install_zsh() {
   
   # Clone Oh My Zsh if it isn't already present
   if [[ ! -d $HOME/.oh-my-zsh/ ]]; then
-    sh -c "$(wget -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
   fi
   
   # Clone zsh-syntax-highlighting plugin if it isn't already present
