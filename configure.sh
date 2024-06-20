@@ -146,8 +146,13 @@ install_zsh() {
   fi
 
   # Clone zsh-nvm plugin if it isn't already present
-    if [[ ! -d $HOME/.oh-my-zsh/custom/plugins/zsh-nvm ]]; then
+  if [[ ! -d $HOME/.oh-my-zsh/custom/plugins/zsh-nvm ]]; then
     git clone https://github.com/lukechilds/zsh-nvm "$HOME/.oh-my-zsh/custom/plugins/zsh-nvm"
+  fi
+
+  if [[ ! -d $HOME/.oh-my-zsh/completions/_docker ]]; then
+    mkdir -p $HOME/.oh-my-zsh/completions
+    docker completion zsh > $HOME/.oh-my-zsh/completions/_docker
   fi
 }
 
