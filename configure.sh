@@ -46,6 +46,7 @@ declare -a FILES_TO_SYMLINK=(
   'fzf.zsh'
   'gitconfig'
   'gitignore'
+  'vimrc'
   'zshenv'
   'zshrc'
 )
@@ -156,6 +157,12 @@ install_zsh() {
   fi
 }
 
+install_vim_plug() {
+  if [[ ! -d $HOME/.vim/autoload/plug.vim ]]; then
+    curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  fi
+}
+
 link_file() {
   local sourceFile=$1
   local targetFile=$2
@@ -189,6 +196,7 @@ if [[ $BUILD ]]; then
   brew bundle --file="$HOME/.dotfiles/Brewfile" --no-upgrade
 
   install_zsh
+  install_vim_plug
 fi
 
 # Symlink (or unlink) the dotfiles.
