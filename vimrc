@@ -1,6 +1,7 @@
 call plug#begin()
 " List your plugins here
 Plug 'preservim/nerdtree'
+Plug 'ctrlpvim/ctrlp.vim'
 call plug#end()
 
 " NERDTree
@@ -17,5 +18,11 @@ autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTr
 
 " Close the tab if NERDTree is the only window remaining in it.
 autocmd BufEnter * if winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | call feedkeys(":quit\<CR>:\<BS>") | endif
-" NERDTree
+" NERDTree end
+
+" Ctrlp
+let g:ctrlp_custom_ignore = {
+  \ 'dir':  '\v[\/](\.git|node_modules|coverage|coverage-e2e)$',
+  \ }
+" Ctrlp end
   
