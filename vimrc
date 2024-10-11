@@ -5,6 +5,10 @@ let mapleader = " "
 " Display hybrid line numbers (relative and absolute)
 set number relativenumber
 
+" Show whitespace characters
+:set listchars=space:·,tab:>#,trail:·
+:set list
+
 " vim-plug
 call plug#begin()
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
@@ -12,6 +16,10 @@ Plug 'junegunn/fzf.vim'
 Plug 'pangloss/vim-javascript'
 Plug 'leafgarland/typescript-vim'
 Plug 'neoclide/coc.nvim', { 'branch': 'release' } " code competion
+Plug 'prettier/vim-prettier', {
+  \ 'do': 'yarn install --frozen-lockfile --production',
+  \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'svelte', 'yaml', 'html'] }
+Plug 'editorconfig/editorconfig-vim'
 call plug#end()
 
 " plug#end() enables syntax highlight, but without this setting it lags and
