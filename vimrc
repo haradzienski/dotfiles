@@ -7,7 +7,7 @@ Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'neoclide/coc.nvim', { 'branch': 'release' } " code competion
 Plug 'editorconfig/editorconfig-vim'
-Plug 'github/copilot.vim'
+" Plug 'github/copilot.vim'
 Plug 'sheerun/vim-polyglot'
 call plug#end()
 
@@ -38,7 +38,7 @@ nnoremap <silent> <C-p> :Files<CR>
 
 " neoclide/coc.nvim
 " CoC Extensions
-let g:coc_global_extensions = ['coc-json', 'coc-tsserver', 'coc-eslint', 'coc-prettier']
+let g:coc_global_extensions = ['coc-json', 'coc-tsserver', 'coc-eslint', 'coc-prettier', 'coc-git']
 
 " Having longer updatetime (default is 4000 ms = 4s) leads to noticeable
 " delays and poor user experience
@@ -127,6 +127,5 @@ command! -nargs=0 Prettier :CocCommand prettier.forceFormatDocument
 nmap <leader>p :Prettier<cr>
 vmap <leader>f <Plug>(coc-format-selected)
 nmap <leader>f <Plug>(coc-format-selected)
-
 " neoclide/coc.nvim
 

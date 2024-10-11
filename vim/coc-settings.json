@@ -1,3 +1,4 @@
 {
+  "git.addGBlameToVirtualText": true,
   "tsserver.useLocalTsdk": true,
 }
