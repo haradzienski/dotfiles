@@ -54,6 +54,7 @@ declare -a FILES_TO_SYMLINK=(
 declare -a FULL_PATH_FILES_TO_SYMLINK=(
   'oh-my-zsh/custom/aliases.zsh'
   'oh-my-zsh/custom/functions.zsh'
+  'vim/coc-settings.json'
 )
 
 print_success() {
