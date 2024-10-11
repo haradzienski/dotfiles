@@ -165,6 +165,8 @@ install_vim_plug() {
   
   vim -c 'PlugClean!' \
       -c 'PlugInstall' \
+      -c 'VimspectorInstall vscode-js-debug' \
+      -c 'VimspectorUpdate' \
       -c 'qa!'
 }
 

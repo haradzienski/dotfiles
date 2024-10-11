@@ -9,6 +9,7 @@ Plug 'neoclide/coc.nvim', { 'branch': 'release' } " code competion
 Plug 'editorconfig/editorconfig-vim'
 " Plug 'github/copilot.vim'
 Plug 'sheerun/vim-polyglot'
+Plug 'puremourning/vimspector'
 call plug#end()
 
 " Turn off regexp engine for syntax highlighting
@@ -129,3 +130,24 @@ vmap <leader>f <Plug>(coc-format-selected)
 nmap <leader>f <Plug>(coc-format-selected)
 " neoclide/coc.nvim
 
+" puremourning/vimspector
+" <leader>dd - Vimspector: Launch (debug debug)
+nnoremap <leader>dd :call vimspector#Launch()<CR>
+" <leader>de - Vimspector: Reset (debug end)
+nnoremap <leader>de :call vimspector#Reset()<CR>
+" <leader>dt - Vimspector: Toggle breakpoint (debug toggle)
+nnoremap <leader>dt :call vimspector#ToggleBreakpoint()<CR>
+" <leader>dc - Vimspector: Continue (debug continue)
+nnoremap <leader>dc :call vimspector#Continue()<CR>
+" <leader>di - Vimspector: Balloon (debug inspect)
+" normal mode: word under cursor
+nmap <leader>di <Plug>VimspectorBalloonEval
+" visual mode: selected text 
+xmap <leader>di <Plug>VimspectorBalloonEval
+" <leader>dl - Vimspector: Step Over (debug l ->)
+nnoremap <leader>dl <Plug>VimspectorStepOver
+" <leader>dj - Vimspector: Step Into (debug j (arrow bottom))
+nnoremap <leader>dj <Plug>VimspectorStepInto
+" <leader>dk - Vimspector: Step Out (debug k ^)
+nnoremap <leader>dk <Plug>VimspectorStepOut
+" puremourning/vimspector end
