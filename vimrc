@@ -6,8 +6,9 @@ let mapleader = " "
 set number relativenumber
 
 " Show whitespace characters
-:set listchars=space:·,tab:>#,trail:·
-:set list
+" <leader>ws - Toggle whitespace characters
+:set listchars=space:·,tab:>#,trail:·,eol:$
+nnoremap <leader>ws :set list!<CR>
 
 " vim-plug
 call plug#begin()
@@ -17,6 +18,7 @@ Plug 'pangloss/vim-javascript'
 Plug 'leafgarland/typescript-vim'
 Plug 'neoclide/coc.nvim', { 'branch': 'release' } " code competion
 Plug 'editorconfig/editorconfig-vim'
+Plug 'github/copilot.vim'
 call plug#end()
 
 " plug#end() enables syntax highlight, but without this setting it lags and
