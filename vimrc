@@ -2,6 +2,9 @@
 nnoremap <Space> <Nop>
 let mapleader = " "
 
+" Display hybrid line numbers (relative and absolute)
+set number relativenumber
+
 " vim-plug
 call plug#begin()
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
@@ -41,5 +44,4 @@ nmap <leader>gt <Plug>(coc-type-definition)
 nmap <leader>gi <Plug>(coc-implementation)
 " <leader>gr - Go to references
 nmap <leader>gr <Plug>(coc-references)
-
 " neoclide/coc.nvim
