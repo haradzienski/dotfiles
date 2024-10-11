@@ -16,9 +16,6 @@ Plug 'junegunn/fzf.vim'
 Plug 'pangloss/vim-javascript'
 Plug 'leafgarland/typescript-vim'
 Plug 'neoclide/coc.nvim', { 'branch': 'release' } " code competion
-Plug 'prettier/vim-prettier', {
-  \ 'do': 'yarn install --frozen-lockfile --production',
-  \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'svelte', 'yaml', 'html'] }
 Plug 'editorconfig/editorconfig-vim'
 call plug#end()
 
@@ -37,8 +34,8 @@ nnoremap <silent> <C-p> :Files<CR>
 " fzf.vim end
 
 " neoclide/coc.nvim
-" TypeScript server for code completion
-let g:coc_global_extensions = ['coc-tsserver']
+" CoC Extensions
+let g:coc_global_extensions = ['coc-tsserver', 'coc-eslint', 'coc-prettier']
 
 " Having longer updatetime (default is 4000 ms = 4s) leads to noticeable
 " delays and poor user experience
@@ -90,4 +87,15 @@ nmap <leader>rn <Plug>(coc-rename)
 nmap <silent> <leader>re <Plug>(coc-codeaction-refactor)
 xmap <silent> <leader>r  <Plug>(coc-codeaction-refactor-selected)
 nmap <silent> <leader>r  <Plug>(coc-codeaction-refactor-selected)
+
+" Set up Prettier command
+command! -nargs=0 Prettier :CocCommand prettier.forceFormatDocument
+
+" <leader>fo - Format file
+" <leader>f - Format selection
+nmap <leader>p :Prettier<cr>
+vmap <leader>f <Plug>(coc-format-selected)
+nmap <leader>f <Plug>(coc-format-selected)
+
 " neoclide/coc.nvim
+
