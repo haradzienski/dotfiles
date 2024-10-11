@@ -99,6 +99,11 @@ source $ZSH/oh-my-zsh.sh
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
 
+# Use ripgrep as default fzf source
+export FZF_DEFAULT_COMMAND="rg --files --hidden --follow --glob '!.git/*'"
+# To apply the command to CTRL-T as well
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+# Source fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
