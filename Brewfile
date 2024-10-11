@@ -13,3 +13,10 @@ brew "pnpm"
 cask "insomnia"
 cask "visual-studio-code"
 cask "docker"
+
+# fzf.vim deps
+brew "bat"
+brew "perl"
+brew "ripgrep"
+brew "the_silver_searcher"
+brew "universal-ctags"
