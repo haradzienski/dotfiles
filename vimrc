@@ -93,7 +93,7 @@ nmap <silent> <leader>r  <Plug>(coc-codeaction-refactor-selected)
 " Set up Prettier command
 command! -nargs=0 Prettier :CocCommand prettier.forceFormatDocument
 
-" <leader>fo - Format file
+" <leader>p - Format file
 " <leader>f - Format selection
 nmap <leader>p :Prettier<cr>
 vmap <leader>f <Plug>(coc-format-selected)
