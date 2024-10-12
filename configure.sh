@@ -200,6 +200,7 @@ unlink_file() {
 
 if [[ $BUILD ]]; then
   install_homebrew
+  brew update
   brew bundle --file="$HOME/.dotfiles/Brewfile" --no-upgrade
 
   install_zsh
