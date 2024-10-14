@@ -16,6 +16,12 @@ call plug#end()
 set re=0
 " vim-plug end
 
+" Enable 24-bit colors
+set termguicolors
+
+" Set desert colorscheme
+colorscheme desert
+
 " Re-map <leader> to <Space>
 nnoremap <Space> <Nop>
 let mapleader = " "
