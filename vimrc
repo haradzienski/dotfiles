@@ -7,7 +7,7 @@ Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'neoclide/coc.nvim', { 'branch': 'release' } " code competion
 Plug 'editorconfig/editorconfig-vim'
-" Plug 'github/copilot.vim'
+Plug 'github/copilot.vim'
 Plug 'sheerun/vim-polyglot'
 Plug 'puremourning/vimspector'
 call plug#end()
@@ -34,9 +34,18 @@ set number relativenumber
 :set listchars=space:·,tab:>#,trail:·,eol:$
 nnoremap <leader>ws :set list!<CR>
 
+" Fold according to syntax
+:set foldmethod=syntax
+
+" Open new vertical splits on the right side
+:set splitright
+
 " netrw (the default file browser)
 " remove banner at the top
-let g:netrw_banner = 0
+let g:netrw_banner=0
+
+" list things in tree mode
+let g:netrw_liststyle=3
 " netrw end
 
 " fzf.vim
