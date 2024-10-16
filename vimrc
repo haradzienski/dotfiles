@@ -6,10 +6,10 @@ call plug#begin()
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'neoclide/coc.nvim', { 'branch': 'release' } " code competion
-Plug 'editorconfig/editorconfig-vim'
-Plug 'github/copilot.vim'
-Plug 'sheerun/vim-polyglot'
-Plug 'puremourning/vimspector'
+" Plug 'editorconfig/editorconfig-vim'
+Plug 'github/copilot.vim' " GitHub Copilot
+Plug 'sheerun/vim-polyglot' " syntax highlighting
+Plug 'puremourning/vimspector' " debugger
 call plug#end()
 
 " Turn off regexp engine for syntax highlighting
