@@ -37,6 +37,9 @@ nnoremap <leader>ws :set list!<CR>
 " Fold according to syntax
 :set foldmethod=syntax
 
+" Start with some folds open
+set foldlevelstart=1
+
 " Open new vertical splits on the right side
 :set splitright
 
