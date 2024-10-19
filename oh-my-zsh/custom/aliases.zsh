@@ -27,3 +27,6 @@ alias nixp='npm i --save-exact --save'
 
 # brew
 alias brew_install_deps='brew bundle --file="$HOME/.dotfiles/Brewfile" --no-upgrade'
+
+# vim
+alias v='vim'
