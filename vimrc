@@ -10,6 +10,7 @@ Plug 'neoclide/coc.nvim', { 'branch': 'release' } " code competion
 Plug 'github/copilot.vim' " GitHub Copilot
 Plug 'sheerun/vim-polyglot' " syntax highlighting
 Plug 'puremourning/vimspector' " debugger
+Plug 'itchyny/lightline.vim' " status line
 call plug#end()
 
 " Turn off regexp engine for syntax highlighting
@@ -169,3 +170,8 @@ nnoremap <leader>dj <Plug>VimspectorStepInto
 " <leader>dk - Vimspector: Step Out (debug k ^)
 nnoremap <leader>dk <Plug>VimspectorStepOut
 " puremourning/vimspector end
+
+" itchyny/lightline.vim
+set laststatus=2
+" itchyny/lightline.vim end
+set laststatus=2
