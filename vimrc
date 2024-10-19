@@ -11,6 +11,7 @@ Plug 'github/copilot.vim' " GitHub Copilot
 Plug 'sheerun/vim-polyglot' " syntax highlighting
 Plug 'puremourning/vimspector' " debugger
 Plug 'itchyny/lightline.vim' " status line
+Plug 'dracula/vim', { 'as': 'dracula' } " dracula theme
 call plug#end()
 
 " Turn off regexp engine for syntax highlighting
@@ -20,8 +21,8 @@ set re=0
 " Enable 24-bit colors
 set termguicolors
 
-" Set desert colorscheme
-colorscheme desert
+" Set dracula colorscheme
+colorscheme dracula
 
 " Re-map <leader> to <Space>
 nnoremap <Space> <Nop>
@@ -173,5 +174,11 @@ nnoremap <leader>dk <Plug>VimspectorStepOut
 
 " itchyny/lightline.vim
 set laststatus=2
+
+" Mode is now shown in the status line
+set noshowmode
+
+let g:lightline = {
+      \ 'colorscheme': 'darcula',
+      \ }
 " itchyny/lightline.vim end
-set laststatus=2
