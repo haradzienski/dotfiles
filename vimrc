@@ -45,6 +45,9 @@ set foldlevelstart=1
 " Open new vertical splits on the right side
 :set splitright
 
+" Allow hidden buffers with unsaved changes
+:set hidden
+
 " netrw (the default file browser)
 " remove banner at the top
 let g:netrw_banner=0
@@ -175,10 +178,25 @@ nnoremap <leader>dk <Plug>VimspectorStepOut
 " itchyny/lightline.vim
 set laststatus=2
 
+" Stop echoing filename and line count into command line
+:set shortmess+=F
+
 " Mode is now shown in the status line
 set noshowmode
 
+" Show the current git branch in the status line
+function! LightlineGitBranch() abort
+  return get(g:, 'coc_git_status', '')
+endfunction
+
 let g:lightline = {
-      \ 'colorscheme': 'darcula',
-      \ }
+\   'colorscheme': 'darcula',
+\   'active': {
+\     'left': [ [ 'mode', 'paste' ], [ 'filename' ], [ 'gitbranch' ] ],
+\     'right': [ [ 'lineinfo' ], [ 'percent' ], [ 'fileformat', 'fileencoding', 'filetype' ] ]
+\   },
+\   'component_function': {
+\     'gitbranch': 'LightlineGitBranch',
+\   },
+\ }
 " itchyny/lightline.vim end
