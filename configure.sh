@@ -167,6 +167,7 @@ install_vim_plug() {
       -c 'PlugInstall' \
       -c 'VimspectorInstall vscode-js-debug' \
       -c 'VimspectorUpdate' \
+      -c 'CocUpdateSync' \
       -c 'qa!'
 }
 
