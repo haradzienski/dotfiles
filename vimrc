@@ -189,14 +189,28 @@ function! LightlineGitBranch() abort
   return get(g:, 'coc_git_status', '')
 endfunction
 
+" Show size of the current selection in the status line
+function! LightlineVisualSelectionSize()
+  if mode() ==# 'v' || mode() ==# 'V' || mode() ==# "\<C-v>"
+    let l:lines = abs(line("v") - line(".")) + 1
+    let l:cols = abs(col("v") - col(".")) + 1
+    return l:lines . 'x' . l:cols
+  endif
+  return ''
+endfunction
+
 let g:lightline = {
 \   'colorscheme': 'darcula',
 \   'active': {
 \     'left': [ [ 'mode', 'paste' ], [ 'filename' ], [ 'gitbranch' ] ],
-\     'right': [ [ 'lineinfo' ], [ 'percent' ], [ 'fileformat', 'fileencoding', 'filetype' ] ]
+\     'right': [ [ 'lineinfo' ],
+\                [ 'percent' ],
+\                [ 'fileformat', 'fileencoding', 'filetype' ],
+\                [ 'visualselectionsize' ] ]
 \   },
 \   'component_function': {
 \     'gitbranch': 'LightlineGitBranch',
+\     'visualselectionsize': 'LightlineVisualSelectionSize'
 \   },
 \ }
 " itchyny/lightline.vim end
