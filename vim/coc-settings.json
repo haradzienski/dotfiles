@@ -1,4 +1,5 @@
 {
   "git.addGBlameToVirtualText": true,
-  "tsserver.useLocalTsdk": true,
+  "git.signPriority": 5,
+  "tsserver.useLocalTsdk": true
 }
