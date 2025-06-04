@@ -1,6 +1,7 @@
 tap "homebrew/bundle"
 tap "homebrew/cask-versions"
 brew "diff-so-fancy"
+brew "duti"
 brew "fzf"
 brew "gh"
 brew "git"
