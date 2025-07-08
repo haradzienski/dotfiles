@@ -1,5 +1,4 @@
 tap "homebrew/bundle"
-tap "homebrew/cask-versions"
 brew "diff-so-fancy"
 brew "duti"
 brew "fzf"
@@ -14,7 +13,7 @@ brew "vim"
 brew "watch"
 cask "insomnia"
 cask "visual-studio-code"
-cask "docker"
+cask "docker-desktop"
 
 # fzf.vim deps
 brew "bat"
