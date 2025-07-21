@@ -107,3 +107,8 @@ export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
+
+# Added by `rbenv init` on Sun Jul 20 17:55:43 PDT 2025 to ~/.zprofile
+if command -v rbenv >/dev/null 2>&1; then
+  eval "$(rbenv init - --no-rehash zsh)"
+fi

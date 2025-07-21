@@ -12,6 +12,7 @@ Plug 'sheerun/vim-polyglot' " syntax highlighting
 Plug 'puremourning/vimspector' " debugger
 Plug 'itchyny/lightline.vim' " status line
 Plug 'dracula/vim', { 'as': 'dracula' } " dracula theme
+Plug 'dense-analysis/ale'
 call plug#end()
 
 " Turn off regexp engine for syntax highlighting
@@ -175,6 +176,41 @@ nnoremap <leader>dj <Plug>VimspectorStepInto
 nnoremap <leader>dk <Plug>VimspectorStepOut
 " puremourning/vimspector end
 
+" dense-analysis/ale
+" Disable ALE in TypeScript
+autocmd FileType typescript,typescriptreact let b:ale_enabled = 0
+
+" Enable ALE globally, then selectively disable elsewhere (above)
+let g:ale_linters = {
+\   'ruby': ['rubocop'],
+\}
+
+let g:ale_fixers = {
+\   'ruby': ['standardrb'],
+\}
+let g:ale_fix_on_save = 1
+
+" Optional: Only lint on save or insert leave
+let g:ale_lint_on_text_changed = 'never'
+let g:ale_lint_on_insert_leave = 1
+let g:ale_lint_on_save = 1
+
+" Show ALE linting result in the status line
+function! AleLinterStatus() abort
+  let l:counts = ale#statusline#count(bufnr(''))
+
+  let l:all_errors = l:counts.error + l:coutns.style_error
+  let l:all_non_errors = l:counts.total - l:all_errors
+
+  return l:counts.total == 0 ? '✨ all good ✨' : printf(
+        \  '😔 %dW %dE',
+        \  all_non_errors,
+        \  all_errors,
+        \)
+endfunction
+
+" dense-analysis/ale end
+
 " itchyny/lightline.vim
 set laststatus=2
 
@@ -206,11 +242,15 @@ let g:lightline = {
 \     'right': [ [ 'lineinfo' ],
 \                [ 'percent' ],
 \                [ 'fileformat', 'fileencoding', 'filetype' ],
+                 [ 'alelinterstatus' ],
 \                [ 'visualselectionsize' ] ]
 \   },
 \   'component_function': {
 \     'gitbranch': 'LightlineGitBranch',
-\     'visualselectionsize': 'LightlineVisualSelectionSize'
+\     'visualselectionsize': 'LightlineVisualSelectionSize',
+      'alelinterstatus': 'AleLinterStatus'
 \   },
 \ }
 " itchyny/lightline.vim end
+
+
