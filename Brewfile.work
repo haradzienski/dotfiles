@@ -4,12 +4,14 @@ tap "derailed/k9s"
 # Brews
 brew "derailed/k9s/k9s"
 brew "kubernetes-cli"
+brew "cloud-sql-proxy"
 
 # Casks
 cask "1password"
 cask "cursor"
 cask "datagrip"
 cask "gather"
+cask "gcloud-cli"
 cask "google-chrome"
 cask "pritunl"
 cask "slack"
