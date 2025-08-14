@@ -18,10 +18,11 @@ cask "bitwarden"
 cask "chatgpt"
 cask "docker-desktop"
 cask "font-maple-mono"
+cask "iterm2"
+cask "logi-options+"
 cask "obsidian"
 cask "rectangle"
 cask "visual-studio-code"
-cask "logi-options+"
 
 # fzf.vim deps
 brew "bat"
