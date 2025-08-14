@@ -1,6 +1,7 @@
-tap "derailed/k9s"
+# Taps
 tap "homebrew/bundle"
-brew "derailed/k9s/k9s"
+
+# Brews
 brew "diff-so-fancy"
 brew "duti"
 brew "fzf"
@@ -10,15 +11,22 @@ brew "gnupg"
 brew "htop"
 brew "jq"
 brew "libpq"
+brew "nvm"
 brew "pnpm"
 brew "rbenv"
 brew "vim"
 brew "watch"
-cask "cursor"
+
+# Casks
+cask "bitwarden"
+cask "chatgpt"
 cask "docker-desktop"
-cask "insomnia"
 cask "font-maple-mono"
+cask "iterm2"
+cask "obsidian"
+cask "rectangle"
 cask "visual-studio-code"
+cask "logi-options+"
 
 # fzf.vim deps
 brew "bat"

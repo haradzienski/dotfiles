@@ -3,16 +3,19 @@
 # Snatched from github.com/MrPickles/dotfiles/configure.sh
 
 # Configuration script to symlink the dotfiles or clean up the symlinks.
-# The script should take a target flag stating whether "build" or "clean". The
-# first option will symlink all of the dotfiles and attempt to install
-# oh-my-zsh. Otherwise, the script will simply remove all symlinks.
+# The script supports three modes via -t: "work", "home", or "clean".
+# - work: installs base Brewfile and optional Brewfile.work, then symlinks
+# - home: installs base Brewfile only, then symlinks
+# - clean: removes all symlinks
 
-usage="Usage: $0 [-h] [-t <build|clean>]"
+usage="Usage: $0 [-h] [-t <work|home|clean>]"
 
 if [[ "$#" -lt 1 ]]; then
   echo "$usage"
   exit
 fi
+
+MODE=""
 
 while getopts :ht: option; do
   case $option in
@@ -21,18 +24,22 @@ while getopts :ht: option; do
       echo
       echo "OPTIONS"
       echo "-h            Output verbose usage message"
-      echo "-t build      Set up dotfile symlinks and configure oh-my-zsh"
+      echo "-t work       Install base Brewfile and Brewfile.work (if present), then set up dotfile symlinks and configure oh-my-zsh"
+      echo "-t home       Install base Brewfile only, then set up dotfile symlinks and configure oh-my-zsh"
       echo "-t clean      Remove all existing dotfiles symlinks"
       exit;;
     t)
-      if [[ "build" =~ ^${OPTARG} ]]; then
-        BUILD=true
-      elif [[ "clean" =~ ^${OPTARG} ]]; then
-        BUILD=
-      else
-        echo "$usage" >&2
-        exit 1
-      fi;;
+      case "$OPTARG" in
+        work)
+          MODE="work";;
+        home)
+          MODE="home";;
+        clean)
+          MODE="clean";;
+        *)
+          echo "$usage" >&2
+          exit 1;;
+      esac;;
     \?)
       echo "Unknown option: -$OPTARG" >&2
       exit 1;;
@@ -58,7 +65,7 @@ declare -a FULL_PATH_FILES_TO_SYMLINK=(
 )
 
 print_success() {
-  if [[ $BUILD ]]; then
+  if [[ "$MODE" == "work" || "$MODE" == "home" ]]; then
     # Print output in green
     printf "\e[0;32m  [✔] %s\e[0m\n" "$1"
   else
@@ -68,7 +75,7 @@ print_success() {
 }
 
 print_error() {
-  if [[ $BUILD ]]; then
+  if [[ "$MODE" == "work" || "$MODE" == "home" ]]; then
     # Print output in red
     printf "\e[0;31m  [✖] %s %s\e[0m\n" "$1" "$2"
   else
@@ -199,11 +206,13 @@ unlink_file() {
   fi
 }
 
-if [[ $BUILD ]]; then
+if [[ "$MODE" == "work" || "$MODE" == "home" ]]; then
   install_homebrew
   brew update
   brew bundle --file="$HOME/.dotfiles/Brewfile" --no-upgrade
-
+  if [[ "$MODE" == "work" ]] && [[ -f "$HOME/.dotfiles/Brewfile.work" ]]; then
+    brew bundle --file="$HOME/.dotfiles/Brewfile.work" --no-upgrade
+  fi
   install_zsh
   install_vim_plug
 fi
@@ -213,7 +222,7 @@ for i in "${FILES_TO_SYMLINK[@]}"; do
   sourceFile="$(pwd)/$i"
   targetFile="$HOME/.$(printf "%s" "$i" | sed "s/.*\/\(.*\)/\1/g")"
 
-  if [[ $BUILD ]]; then
+  if [[ "$MODE" == "work" || "$MODE" == "home" ]]; then
     link_file $sourceFile $targetFile
   else
     unlink_file $sourceFile $targetFile
@@ -224,7 +233,7 @@ for i in "${FULL_PATH_FILES_TO_SYMLINK[@]}"; do
   sourceFile="$(pwd)/$i"
   targetFile="$HOME/.$i"
 
-  if [[ $BUILD ]]; then
+  if [[ "$MODE" == "work" || "$MODE" == "home" ]]; then
     mkdir -p $(dirname $targetFile)
     link_file $sourceFile $targetFile
   else
