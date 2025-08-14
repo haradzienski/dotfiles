@@ -3,6 +3,7 @@ tap "derailed/k9s"
 
 # Brews
 brew "derailed/k9s/k9s"
+brew "kubernetes-cli"
 
 # Casks
 cask "1password"
@@ -10,5 +11,4 @@ cask "cursor"
 cask "datagrip"
 cask "gather"
 cask "google-chrome"
-cask "kubernetes-cli"
 cask "pritunl"

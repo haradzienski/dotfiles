@@ -1,6 +1,3 @@
-# Taps
-tap "homebrew/bundle"
-
 # Brews
 brew "diff-so-fancy"
 brew "duti"
@@ -11,7 +8,6 @@ brew "gnupg"
 brew "htop"
 brew "jq"
 brew "libpq"
-brew "nvm"
 brew "pnpm"
 brew "rbenv"
 brew "vim"
@@ -22,7 +18,6 @@ cask "bitwarden"
 cask "chatgpt"
 cask "docker-desktop"
 cask "font-maple-mono"
-cask "iterm2"
 cask "obsidian"
 cask "rectangle"
 cask "visual-studio-code"
