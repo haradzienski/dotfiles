@@ -242,15 +242,13 @@ let g:lightline = {
 \     'right': [ [ 'lineinfo' ],
 \                [ 'percent' ],
 \                [ 'fileformat', 'fileencoding', 'filetype' ],
-                 [ 'alelinterstatus' ],
+\                [ 'alelinterstatus' ],
 \                [ 'visualselectionsize' ] ]
 \   },
 \   'component_function': {
 \     'gitbranch': 'LightlineGitBranch',
 \     'visualselectionsize': 'LightlineVisualSelectionSize',
-      'alelinterstatus': 'AleLinterStatus'
+\     'alelinterstatus': 'AleLinterStatus'
 \   },
 \ }
 " itchyny/lightline.vim end
-
-
