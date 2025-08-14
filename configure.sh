@@ -59,9 +59,11 @@ declare -a FILES_TO_SYMLINK=(
 )
 
 declare -a FULL_PATH_FILES_TO_SYMLINK=(
+  'cursor/extensions/extensions.json'
   'oh-my-zsh/custom/aliases.zsh'
   'oh-my-zsh/custom/functions.zsh'
   'vim/coc-settings.json'
+  'vscode/extensions/extensions.json'
 )
 
 print_success() {
