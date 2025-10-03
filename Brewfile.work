@@ -2,9 +2,11 @@
 tap "derailed/k9s"
 
 # Brews
-brew "derailed/k9s/k9s"
-brew "kubernetes-cli"
 brew "cloud-sql-proxy"
+brew "derailed/k9s/k9s"
+brew "gemini-cli"
+brew "kubernetes-cli"
+brew "kubeseal"
 
 # Casks
 cask "1password"
