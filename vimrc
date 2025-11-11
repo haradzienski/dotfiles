@@ -7,7 +7,7 @@ Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'neoclide/coc.nvim', { 'branch': 'release' } " code competion
 " Plug 'editorconfig/editorconfig-vim'
-Plug 'github/copilot.vim' " GitHub Copilot
+" Plug 'github/copilot.vim' " GitHub Copilot
 Plug 'sheerun/vim-polyglot' " syntax highlighting
 Plug 'puremourning/vimspector' " debugger
 Plug 'itchyny/lightline.vim' " status line
