@@ -1,0 +1,45 @@
+// Zed settings
+//
+// For information on how to configure Zed, see the Zed
+// documentation: https://zed.dev/docs/configuring-zed
+//
+// To see all of Zed's default settings without changing your
+// custom settings, run `zed: open default settings` from the
+// command palette (cmd-shift-p / ctrl-shift-p)
+{
+  "agent_servers": {
+  },
+  "agent": {
+    "default_model": {
+      "provider": "google",
+      "model": "gemini-2.5-pro"
+    },
+    "model_parameters": []
+  },
+  "buffer_font_family": "Maple Mono",
+  "terminal": {
+    "font_size": 14.0,
+    "font_family": "Maple Mono, JetBrains Mono"
+  },
+  "base_keymap": "VSCode",
+  "minimap": {
+    "show": "always"
+  },
+  "autosave": "on_focus_change",
+  "show_whitespaces": "all",
+  "show_edit_predictions": true,
+  "tab_size": 2,
+  "icon_theme": {
+    "mode": "dark",
+    "light": "Zed (Default)",
+    "dark": "Zed (Default)"
+  },
+  "ui_font_size": 16,
+  "buffer_font_size": 14.0,
+  "theme": {
+    "mode": "dark",
+    "light": "One Light",
+    "dark": "One Dark"
+  },
+  "format_on_save": "off"
+}

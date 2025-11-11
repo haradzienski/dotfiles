@@ -59,6 +59,8 @@ declare -a FILES_TO_SYMLINK=(
 )
 
 declare -a FULL_PATH_FILES_TO_SYMLINK=(
+  'config/zed/keymap.json'
+  'config/zed/settings.json'
   'oh-my-zsh/custom/aliases.zsh'
   'oh-my-zsh/custom/functions.zsh'
   'vim/coc-settings.json'
@@ -132,7 +134,7 @@ install_package() {
   # Test to see if the package is installed
   if [ -z "$(command -v $packageName)" ]; then
     # Install if not
-    brew install $packageName    
+    brew install $packageName
   fi
 }
 
@@ -143,12 +145,12 @@ install_zsh() {
   if [[ ! "$SHELL" == "$(command -v zsh)" ]]; then
     chsh -s "$(command -v zsh)"
   fi
-  
+
   # Clone Oh My Zsh if it isn't already present
   if [[ ! -d $HOME/.oh-my-zsh/ ]]; then
     sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
   fi
-  
+
   # Clone zsh-syntax-highlighting plugin if it isn't already present
   if [[ ! -d $HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting ]]; then
     git clone https://github.com/zsh-users/zsh-syntax-highlighting.git "$HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting"
@@ -169,7 +171,7 @@ install_vim_plug() {
   if [[ ! -d $HOME/.vim/autoload/plug.vim ]]; then
     curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
   fi
-  
+
   vim -c 'PlugClean!' \
       -c 'PlugInstall' \
       -c 'VimspectorInstall vscode-js-debug' \
