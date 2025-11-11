@@ -23,6 +23,7 @@ cask "logi-options+"
 cask "obsidian"
 cask "rectangle"
 cask "visual-studio-code"
+cask "zed"
 
 # fzf.vim deps
 brew "bat"

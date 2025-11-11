@@ -10,6 +10,7 @@ brew "kubeseal"
 
 # Casks
 cask "1password"
+cask "claude-code"
 cask "cursor"
 cask "datagrip"
 cask "gather"
