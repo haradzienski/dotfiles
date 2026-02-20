@@ -1,7 +1,9 @@
 # Taps
+tap "atlassian/homebrew-acli"
 tap "derailed/k9s"
 
 # Brews
+brew "acli"
 brew "cloud-sql-proxy"
 brew "derailed/k9s/k9s"
 brew "gemini-cli"
@@ -11,7 +13,6 @@ brew "kubeseal"
 # Casks
 cask "1password"
 cask "claude-code"
-cask "cursor"
 cask "datagrip"
 cask "gather"
 cask "gcloud-cli"
