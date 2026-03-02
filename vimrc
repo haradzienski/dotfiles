@@ -22,7 +22,7 @@ set re=0
 set termguicolors
 
 " Set dracula colorscheme
-colorscheme dracula
+silent! colorscheme dracula
 
 " Re-map <leader> to <Space>
 nnoremap <Space> <Nop>

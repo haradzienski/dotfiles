@@ -168,16 +168,23 @@ install_zsh() {
 }
 
 install_vim_plug() {
-  if [[ ! -d $HOME/.vim/autoload/plug.vim ]]; then
-    curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  local dotfilesDir
+  dotfilesDir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+  if [[ ! -f "$HOME/.vim/autoload/plug.vim" ]]; then
+    curl -fLo "$HOME/.vim/autoload/plug.vim" --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
   fi
 
-  vim -c 'PlugClean!' \
-      -c 'PlugInstall' \
-      -c 'VimspectorInstall vscode-js-debug' \
-      -c 'VimspectorUpdate' \
-      -c 'CocUpdateSync' \
-      -c 'qa!'
+  # Use repo vimrc directly so Plug commands are available even on first run.
+  if ! vim -Nu "$dotfilesDir/vimrc" -n -es \
+      -c 'set nomore' \
+      -c 'PlugInstall --sync' \
+      -c 'if exists(":VimspectorInstall") | VimspectorInstall vscode-js-debug | endif' \
+      -c 'if exists(":VimspectorUpdate") | VimspectorUpdate | endif' \
+      -c 'if exists(":CocUpdateSync") | CocUpdateSync | endif' \
+      -c 'qa!'; then
+    printf "\e[0;33m  [!] vim plugin bootstrap returned non-zero; continuing.\e[0m\n"
+  fi
 }
 
 link_file() {
