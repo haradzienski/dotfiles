@@ -112,3 +112,5 @@ export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
 if command -v rbenv >/dev/null 2>&1; then
   eval "$(rbenv init - --no-rehash zsh)"
 fi
+
+export XDG_CONFIG_HOME=$HOME/.dotfiles
