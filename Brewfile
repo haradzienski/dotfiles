@@ -16,6 +16,7 @@ brew "watch"
 # Casks
 cask "bitwarden"
 cask "chatgpt"
+cask "codex"
 cask "docker-desktop"
 cask "font-maple-mono"
 cask "iterm2"
