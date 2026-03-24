@@ -114,6 +114,3 @@ if command -v rbenv >/dev/null 2>&1; then
 fi
 
 export XDG_CONFIG_HOME=$HOME/.dotfiles
-
-# Claude Code
-export ENABLE_CLAUDEAI_MCP_SERVERS=false

@@ -10,6 +10,7 @@ brew "jq"
 brew "libpq"
 brew "pnpm"
 brew "rbenv"
+brew "tmux"
 brew "vim"
 brew "watch"
 

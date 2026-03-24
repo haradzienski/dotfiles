@@ -3,3 +3,4 @@ Brewfile.lock.json
 .idea
 **/node_modules
 gh/hosts.yml
+linear/
