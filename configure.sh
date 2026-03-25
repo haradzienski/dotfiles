@@ -222,6 +222,11 @@ if [[ "$MODE" == "work" || "$MODE" == "home" ]]; then
   if [[ "$MODE" == "work" ]] && [[ -f "$HOME/.dotfiles/Brewfile.work" ]]; then
     brew bundle --file="$HOME/.dotfiles/Brewfile.work" --no-upgrade
   fi
+  # Install Python CLI tools via pipx
+  if command -v pipx &>/dev/null; then
+    pipx install it2 2>/dev/null || true
+  fi
+
   install_zsh
   install_vim_plug
 fi

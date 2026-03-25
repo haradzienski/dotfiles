@@ -106,7 +106,7 @@ export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 # Source fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
+export PATH="/opt/homebrew/opt/libpq/bin:$HOME/.local/bin:$PATH"
 
 # Added by `rbenv init` on Sun Jul 20 17:55:43 PDT 2025 to ~/.zprofile
 if command -v rbenv >/dev/null 2>&1; then
