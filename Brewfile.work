@@ -16,7 +16,7 @@ brew "schpet/tap/linear"
 
 # Casks
 cask "1password"
-cask "claude-code"
+cask "claude-code@latest"
 cask "datagrip"
 cask "gather"
 cask "gcloud-cli"
