@@ -11,6 +11,7 @@ brew "libpq"
 brew "pipx"
 brew "pnpm"
 brew "rbenv"
+brew "tmux"
 brew "vim"
 brew "watch"
 
