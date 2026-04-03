@@ -1,0 +1,18 @@
+{
+  "claude-plugins-official": {
+    "source": {
+      "source": "github",
+      "repo": "anthropics/claude-plugins-official"
+    },
+    "installLocation": "/Users/haradzienski/.claude/plugins/marketplaces/claude-plugins-official",
+    "lastUpdated": "2026-04-03T08:13:47.292Z"
+  },
+  "local-plugins": {
+    "source": {
+      "source": "directory",
+      "path": "/Users/haradzienski/Documents/Repos/persistent-assistant-plugin"
+    },
+    "installLocation": "/Users/haradzienski/Documents/Repos/persistent-assistant-plugin",
+    "lastUpdated": "2026-04-02T04:46:33.724Z"
+  }
+}
