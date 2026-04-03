@@ -5,7 +5,7 @@
       "repo": "anthropics/claude-plugins-official"
     },
     "installLocation": "/Users/haradzienski/.claude/plugins/marketplaces/claude-plugins-official",
-    "lastUpdated": "2026-04-03T08:13:47.292Z"
+    "lastUpdated": "2026-04-03T08:27:03.270Z"
   },
   "local-plugins": {
     "source": {
@@ -14,5 +14,13 @@
     },
     "installLocation": "/Users/haradzienski/Documents/Repos/cairn",
     "lastUpdated": "2026-04-02T04:46:33.724Z"
+  },
+  "linear-cli": {
+    "source": {
+      "source": "github",
+      "repo": "schpet/linear-cli"
+    },
+    "installLocation": "/Users/haradzienski/.claude/plugins/marketplaces/linear-cli",
+    "lastUpdated": "2026-04-03T08:22:18.643Z"
   }
 }
