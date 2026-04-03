@@ -59,6 +59,7 @@ declare -a FILES_TO_SYMLINK=(
 )
 
 declare -a FULL_PATH_FILES_TO_SYMLINK=(
+  'claude/plugins/known_marketplaces.json'
   'claude/settings.json'
   'config/zed/keymap.json'
   'config/zed/settings.json'
