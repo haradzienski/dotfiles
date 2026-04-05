@@ -114,12 +114,3 @@ if command -v rbenv >/dev/null 2>&1; then
 fi
 
 export XDG_CONFIG_HOME=$HOME/.dotfiles
-
-# Export GitHub token for child tools launched from this interactive shell.
-if command -v gh >/dev/null 2>&1 && [ -z "${GH_TOKEN:-}" ]; then
-  gh_token="$(gh auth token 2>/dev/null)"
-  if [ -n "$gh_token" ]; then
-    export GH_TOKEN="$gh_token"
-  fi
-  unset gh_token
-fi

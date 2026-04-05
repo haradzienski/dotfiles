@@ -2,6 +2,7 @@
 brew "diff-so-fancy"
 brew "duti"
 brew "fzf"
+brew "gemini-cli"
 brew "gh"
 brew "git"
 brew "gnupg"
