@@ -4,6 +4,10 @@
     "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "true"
   },
   "permissions": {
+    "additionalDirectories": [
+      "/Users/haradzienski/.dotfiles",
+      "/Users/haradzienski/Documents/Repos/exocortex"
+    ],
     "defaultMode": "auto"
   },
   "model": "opus[1m]",
