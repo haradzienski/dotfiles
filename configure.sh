@@ -62,7 +62,6 @@ declare -a FULL_PATH_FILES_TO_SYMLINK=(
   'claude/settings.json'
   'config/zed/keymap.json'
   'config/zed/settings.json'
-  'agents/.skill-lock.json'
   'oh-my-zsh/custom/aliases.zsh'
   'oh-my-zsh/custom/functions.zsh'
   'vim/coc-settings.json'
@@ -189,6 +188,39 @@ install_vim_plug() {
   fi
 }
 
+install_skills() {
+  local skillsfile=$1
+
+  [[ ! -f "$skillsfile" ]] && return 0
+
+  if ! command -v npx &>/dev/null; then
+    printf "\e[0;33m  [!] npx not found — skipping skill installation.\e[0m\n"
+    return 1
+  fi
+
+  printf "\e[0;34m  Installing skills from %s...\e[0m\n" "$(basename "$skillsfile")"
+
+  # Collect unique repos, then batch each repo's skills into one npx call
+  local repos
+  repos=$(grep -v '^\s*#' "$skillsfile" | grep -v '^\s*$' | awk '{print $1}' | sort -u)
+
+  while IFS= read -r repo; do
+    [[ -z "$repo" ]] && continue
+    local skills
+    skills=$(grep -v '^\s*#' "$skillsfile" | grep -v '^\s*$' | awk -v r="$repo" '$1 == r {print $2}' | xargs)
+
+    if [[ -z "$skills" ]]; then
+      continue
+    fi
+
+    if npx skills add "$repo" -g --skill $skills -y; then
+      print_success "skills from $repo"
+    else
+      print_error "skills from $repo" "(npx skills add failed)"
+    fi
+  done <<< "$repos"
+}
+
 link_file() {
   local sourceFile=$1
   local targetFile=$2
@@ -231,6 +263,12 @@ if [[ "$MODE" == "work" || "$MODE" == "home" ]]; then
 
   install_zsh
   install_vim_plug
+
+  # Install agent skills (mirrors Brewfile/Brewfile.work pattern)
+  install_skills "$HOME/.dotfiles/agents/Skillsfile"
+  if [[ "$MODE" == "work" ]] && [[ -f "$HOME/.dotfiles/agents/Skillsfile.work" ]]; then
+    install_skills "$HOME/.dotfiles/agents/Skillsfile.work"
+  fi
 fi
 
 # Symlink (or unlink) the dotfiles.

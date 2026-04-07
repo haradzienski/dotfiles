@@ -1,0 +1,5 @@
+# Base skills — installed on all machines
+vercel-labs/skills        find-skills
+google-gemini/gemini-cli  code-reviewer
+github/awesome-copilot    gh-cli
+makenotion/skills         notion-cli
