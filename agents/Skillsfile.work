@@ -1,5 +1,18 @@
 # Work-only skills — Google Workspace
 googleworkspace/cli  gws-calendar
+# Personal workflow skills
+haradzienski/agent-skills  github-activity
+haradzienski/agent-skills  kubernetes-commands
+haradzienski/agent-skills  linear-notifications
+haradzienski/agent-skills  linear-ops
+haradzienski/agent-skills  mail
+haradzienski/agent-skills  morning-review
+haradzienski/agent-skills  notion-updates
+haradzienski/agent-skills  open-backend-prs
+haradzienski/agent-skills  reminders
+haradzienski/agent-skills  slack-activity
+haradzienski/agent-skills  team-activity
+haradzienski/agent-skills  what-ive-done
 googleworkspace/cli  gws-calendar-agenda
 googleworkspace/cli  gws-calendar-insert
 googleworkspace/cli  gws-gmail
