@@ -213,11 +213,13 @@ install_skills() {
       continue
     fi
 
-    # Prefer local checkout if available (avoids HTTPS auth issues with private repos)
+    # Prefer local checkout if available (avoids HTTPS auth issues with private repos).
+    # Only matches when the local repo's git remote contains the same owner/repo.
     local source="$repo"
     local repo_name="${repo##*/}"
-    if [[ -d "${REPOS_DIR:-$HOME/Documents/Repos}/$repo_name" ]]; then
-      source="${REPOS_DIR:-$HOME/Documents/Repos}/$repo_name"
+    local local_path="${REPOS_DIR:-$HOME/Documents/Repos}/$repo_name"
+    if [[ -d "$local_path/.git" ]] && git -C "$local_path" remote get-url origin 2>/dev/null | grep -q "$repo"; then
+      source="$local_path"
     fi
 
     if npx skills add "$source" -g --skill $skills -y; then
