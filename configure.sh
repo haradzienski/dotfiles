@@ -200,25 +200,32 @@ install_skills() {
 
   printf "\e[0;34m  Installing skills from %s...\e[0m\n" "$(basename "$skillsfile")"
 
-  # Collect unique repos, then batch each repo's skills into one npx call
-  local repos
-  repos=$(grep -v '^\s*#' "$skillsfile" | grep -v '^\s*$' | awk '{print $1}' | sort -u)
+  # Collect unique sources, then batch each source's skills into one npx call.
+  # Source formats:
+  #   owner/repo          — GitHub repo (default)
+  #   file:/path/to/repo  — local path (for private repos)
+  local sources
+  sources=$(grep -v '^\s*#' "$skillsfile" | grep -v '^\s*$' | awk '{print $1}' | sort -u)
 
-  while IFS= read -r repo; do
-    [[ -z "$repo" ]] && continue
+  while IFS= read -r source; do
+    [[ -z "$source" ]] && continue
     local skills
-    skills=$(grep -v '^\s*#' "$skillsfile" | grep -v '^\s*$' | awk -v r="$repo" '$1 == r {print $2}' | xargs)
+    skills=$(grep -v '^\s*#' "$skillsfile" | grep -v '^\s*$' | awk -v s="$source" '$1 == s {print $2}' | xargs)
 
     if [[ -z "$skills" ]]; then
       continue
     fi
 
-    if npx skills add "$repo" -g --skill $skills -y; then
-      print_success "skills from $repo"
+    # Strip scheme prefix and expand ~ to get the path npx skills expects
+    local add_target="${source#file:}"
+    add_target="${add_target/#\~/$HOME}"
+
+    if npx skills add "$add_target" -g --skill $skills -y; then
+      print_success "skills from $source"
     else
-      print_error "skills from $repo" "(npx skills add failed)"
+      print_error "skills from $source" "(npx skills add failed)"
     fi
-  done <<< "$repos"
+  done <<< "$sources"
 }
 
 link_file() {
