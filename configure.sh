@@ -213,7 +213,14 @@ install_skills() {
       continue
     fi
 
-    if npx skills add "$repo" -g --skill $skills -y; then
+    # Prefer local checkout if available (avoids HTTPS auth issues with private repos)
+    local source="$repo"
+    local repo_name="${repo##*/}"
+    if [[ -d "${REPOS_DIR:-$HOME/Documents/Repos}/$repo_name" ]]; then
+      source="${REPOS_DIR:-$HOME/Documents/Repos}/$repo_name"
+    fi
+
+    if npx skills add "$source" -g --skill $skills -y; then
       print_success "skills from $repo"
     else
       print_error "skills from $repo" "(npx skills add failed)"
