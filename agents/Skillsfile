@@ -3,3 +3,6 @@ vercel-labs/skills        find-skills
 google-gemini/gemini-cli  code-reviewer
 github/awesome-copilot    gh-cli
 makenotion/skills         notion-cli
+google-labs-code/stitch-skills design-md
+google-labs-code/stitch-skills stitch-design
+google-labs-code/stitch-skills enhance-prompt

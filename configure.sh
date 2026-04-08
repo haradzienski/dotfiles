@@ -220,7 +220,7 @@ install_skills() {
     local add_target="${source#file:}"
     add_target="${add_target/#\~/$HOME}"
 
-    if npx skills add "$add_target" -g --skill $skills -y; then
+    if npx skills add "$add_target" -g --skill $skills -y </dev/null; then
       print_success "skills from $source"
     else
       print_error "skills from $source" "(npx skills add failed)"
