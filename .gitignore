@@ -5,3 +5,4 @@ agents/.skill-lock.json
 **/node_modules
 gh/hosts.yml
 linear/
+coc/extensions/
