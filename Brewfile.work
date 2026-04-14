@@ -13,6 +13,7 @@ brew "keith/formulae/reminders-cli"
 brew "kubernetes-cli"
 brew "kubeseal"
 brew "schpet/tap/linear"
+brew "caddy"
 
 # Casks
 cask "1password"

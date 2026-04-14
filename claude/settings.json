@@ -4,53 +4,14 @@
     "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "true"
   },
   "permissions": {
+    "defaultMode": "auto",
     "additionalDirectories": [
       "/Users/haradzienski/.dotfiles",
       "/Users/haradzienski/Documents/Repos/exocortex"
-    ],
-    "defaultMode": "auto"
+    ]
   },
   "model": "opus[1m]",
-  "enabledPlugins": {
-    "context7@claude-plugins-official": true,
-    "typescript-lsp@claude-plugins-official": true,
-    "skill-creator@claude-plugins-official": true,
-    "slack@claude-plugins-official": true,
-    "stripe@claude-plugins-official": false,
-    "posthog@claude-plugins-official": true,
-    "notion@claude-plugins-official": true,
-    "cairn@local-plugins": true,
-    "linear-cli@linear-cli": true
-  },
-  "extraKnownMarketplaces": {
-    "claude-plugins-official": {
-      "source": {
-        "source": "github",
-        "repo": "anthropics/claude-plugins-official"
-      }
-    },
-    "local-plugins": {
-      "source": {
-        "source": "directory",
-        "path": "/Users/haradzienski/Documents/Repos/cairn"
-      }
-    },
-    "linear-cli": {
-      "source": {
-        "source": "github",
-        "repo": "schpet/linear-cli"
-      }
-    }
-  },
   "effortLevel": "high",
-  "pluginConfigs": {
-    "cairn@local-plugins": {
-      "options": {
-        "vault_root": "/Users/haradzienski/Documents/Repos/claude-code-memory-vault",
-        "daemon_ingest": "false"
-      }
-    }
-  },
   "autoMemoryDirectory": "/Users/haradzienski/Documents/Repos/claude-code-memory-vault",
   "skipDangerousModePermissionPrompt": true,
   "skipAutoPermissionPrompt": true
