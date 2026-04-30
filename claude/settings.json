@@ -14,5 +14,7 @@
   "effortLevel": "high",
   "autoMemoryDirectory": "/Users/haradzienski/Documents/Repos/claude-code-memory-vault",
   "skipDangerousModePermissionPrompt": true,
-  "skipAutoPermissionPrompt": true
+  "skipAutoPermissionPrompt": true,
+  "remoteControlAtStartup": true,
+  "agentPushNotifEnabled": true
 }

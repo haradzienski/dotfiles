@@ -18,6 +18,7 @@ brew "caddy"
 # Casks
 cask "1password"
 cask "claude-code@latest"
+cask "cursor-cli"
 cask "datagrip"
 cask "gather"
 cask "gcloud-cli"
