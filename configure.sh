@@ -59,7 +59,6 @@ declare -a FILES_TO_SYMLINK=(
 )
 
 declare -a FULL_PATH_FILES_TO_SYMLINK=(
-  'claude/settings.json'
   'config/zed/keymap.json'
   'config/zed/settings.json'
   'oh-my-zsh/custom/aliases.zsh'
@@ -188,46 +187,6 @@ install_vim_plug() {
   fi
 }
 
-install_skills() {
-  local skillsfile=$1
-
-  [[ ! -f "$skillsfile" ]] && return 0
-
-  if ! command -v npx &>/dev/null; then
-    printf "\e[0;33m  [!] npx not found — skipping skill installation.\e[0m\n"
-    return 1
-  fi
-
-  printf "\e[0;34m  Installing skills from %s...\e[0m\n" "$(basename "$skillsfile")"
-
-  # Collect unique sources, then batch each source's skills into one npx call.
-  # Source formats:
-  #   owner/repo          — GitHub repo (default)
-  #   file:/path/to/repo  — local path (for private repos)
-  local sources
-  sources=$(grep -v '^\s*#' "$skillsfile" | grep -v '^\s*$' | awk '{print $1}' | sort -u)
-
-  while IFS= read -r source; do
-    [[ -z "$source" ]] && continue
-    local skills
-    skills=$(grep -v '^\s*#' "$skillsfile" | grep -v '^\s*$' | awk -v s="$source" '$1 == s {print $2}' | xargs)
-
-    if [[ -z "$skills" ]]; then
-      continue
-    fi
-
-    # Strip scheme prefix and expand ~ to get the path npx skills expects
-    local add_target="${source#file:}"
-    add_target="${add_target/#\~/$HOME}"
-
-    if npx skills add "$add_target" -g --skill $skills -y </dev/null; then
-      print_success "skills from $source"
-    else
-      print_error "skills from $source" "(npx skills add failed)"
-    fi
-  done <<< "$sources"
-}
-
 link_file() {
   local sourceFile=$1
   local targetFile=$2
@@ -270,12 +229,6 @@ if [[ "$MODE" == "work" || "$MODE" == "home" ]]; then
 
   install_zsh
   install_vim_plug
-
-  # Install agent skills (mirrors Brewfile/Brewfile.work pattern)
-  install_skills "$HOME/.dotfiles/agents/Skillsfile"
-  if [[ "$MODE" == "work" ]] && [[ -f "$HOME/.dotfiles/agents/Skillsfile.work" ]]; then
-    install_skills "$HOME/.dotfiles/agents/Skillsfile.work"
-  fi
 fi
 
 # Symlink (or unlink) the dotfiles.

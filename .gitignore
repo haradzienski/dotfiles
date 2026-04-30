@@ -1,6 +1,5 @@
 .DS_Store
 Brewfile.lock.json
-agents/.skill-lock.json
 .idea
 **/node_modules
 gh/hosts.yml
