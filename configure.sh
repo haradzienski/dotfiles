@@ -16,6 +16,7 @@ if [[ "$#" -lt 1 ]]; then
 fi
 
 MODE=""
+SPEC_KIT_VERSION="v0.8.3"
 
 while getopts :ht: option; do
   case $option in
@@ -187,6 +188,36 @@ install_vim_plug() {
   fi
 }
 
+install_spec_kit() {
+  local install_source="git+https://github.com/github/spec-kit.git@$SPEC_KIT_VERSION"
+  local installed_source=""
+  local installed_version=""
+
+  if ! command -v pipx &>/dev/null; then
+    printf "\e[0;33m  [!] pipx not found — skipping Spec Kit installation.\e[0m\n"
+    return 1
+  fi
+
+  if command -v jq &>/dev/null; then
+    installed_version="$(pipx list --json 2>/dev/null | jq -r '.venvs["specify-cli"].metadata.main_package.package_version // ""' 2>/dev/null)"
+    installed_source="$(pipx list --json 2>/dev/null | jq -r '.venvs["specify-cli"].metadata.main_package.package_or_url // ""' 2>/dev/null)"
+  fi
+
+  if [[ "$installed_version" == "${SPEC_KIT_VERSION#v}" && "$installed_source" == "$install_source" ]]; then
+    print_success "Spec Kit $SPEC_KIT_VERSION"
+    return 0
+  fi
+
+  printf "\e[0;34m  Installing/updating Spec Kit %s...\e[0m\n" "$SPEC_KIT_VERSION"
+
+  if pipx install --force "$install_source" </dev/null; then
+    print_success "Spec Kit $SPEC_KIT_VERSION"
+  else
+    print_error "Spec Kit $SPEC_KIT_VERSION" "(pipx install failed)"
+    return 1
+  fi
+}
+
 link_file() {
   local sourceFile=$1
   local targetFile=$2
@@ -226,6 +257,7 @@ if [[ "$MODE" == "work" || "$MODE" == "home" ]]; then
   if command -v pipx &>/dev/null; then
     pipx install it2 2>/dev/null || true
   fi
+  install_spec_kit
 
   install_zsh
   install_vim_plug
