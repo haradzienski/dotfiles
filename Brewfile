@@ -15,6 +15,7 @@ brew "rbenv"
 brew "tmux"
 brew "vim"
 brew "watch"
+brew "watchman"
 
 # Casks
 cask "bitwarden"
